@@ -1,22 +1,24 @@
 public class Main {
     public static void main(String[] args) {
 
-        User user = new User("Geera", "geera@swed.de");
+        User geera = new User("Geera", "geera@swed.de");
 
-        Website website = new Website("https://gi.n,mthub.com/");
+        Website website1 = new Website("https://github.com/");
+        Website website2 = new Website("https://wttr.in/");
 
         Systems system = new Systems();
 
-        system.addUser(user);
+        system.addUser(geera);
 
-        system.subscribe(user, website);
+        system.subscribe(geera, website1);
+        system.subscribe(geera, website2);
 
         while (true) {
             system.checkUpdate();
             try {
-                Thread.sleep(600);
+                Thread.sleep(100000);
             } catch (InterruptedException e) {
-                System.out.printf("Error occured");
+                System.out.println("Error occured");
             }
         }
     }

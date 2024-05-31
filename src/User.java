@@ -6,9 +6,11 @@ public class User {
     private String email;
     private List<WebsiteSubscription> subscriptionList = new ArrayList<>();
 
+
     public void addSubscriptions(WebsiteSubscription subscription){
         subscriptionList.add(subscription);
     }
+
 
     public List<WebsiteSubscription> getSubscriptionList() {
         return subscriptionList;

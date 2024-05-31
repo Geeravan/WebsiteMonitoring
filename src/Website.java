@@ -13,7 +13,7 @@ public class Website {
     public String getUrl() {
         return url;
     }
-    public String fetchContent() throws IOException {
+    public String downloadContent() throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("GET");
         Scanner scanner = new Scanner(connection.getInputStream());
@@ -22,7 +22,7 @@ public class Website {
         while (scanner.hasNextLine()) {
             content.append(scanner.nextLine());
         }
+
         return content.toString();
     }
 }
-

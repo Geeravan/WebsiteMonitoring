@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Systems {
     private List<User> userList = new ArrayList<>();
+    private Notification notification = new Notification();
 
     public void addUser(User user){
         userList.add(user);
@@ -17,7 +18,7 @@ public class Systems {
         for (User user : userList) {
             for (WebsiteSubscription subscription : user.getSubscriptionList()) {
                 try {
-                    String currentContent = subscription.getWebsite().fetchContent();
+                    String currentContent = subscription.getWebsite().downloadContent();
                     if (currentContent.equals(subscription.getLastcontent())) {
 
                     } else {
@@ -25,12 +26,9 @@ public class Systems {
                         Notification.sendmessage(user, "Website " + subscription.getWebsite().getUrl() + " has been updated.");
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error connecting to Website:" + subscription.getWebsite().getUrl());
                 }
             }
         }
     }
 }
-
-
-
