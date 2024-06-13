@@ -5,6 +5,7 @@ import java.util.List;
 public class Systems {
     private List<User> userList = new ArrayList<>();
     private Notification notification = new Notification();
+    private ComparisonStrategy comparisonStrategy = new ContentSizeComparisonStrategy();
 
     public void addUser(User user){
         userList.add(user);
@@ -19,9 +20,7 @@ public class Systems {
             for (WebsiteSubscription subscription : user.getSubscriptionList()) {
                 try {
                     String currentContent = subscription.getWebsite().downloadContent();
-                    if (currentContent.equals(subscription.getLastcontent())) {
-
-                    } else {
+                    if (!comparisonStrategy.compare(currentContent,subscription.getWebsite().downloadContent())) {
                         subscription.setLastcontent(currentContent);
                         Notification.sendmessage(user, "Website " + subscription.getWebsite().getUrl() + " has been updated.");
                     }
