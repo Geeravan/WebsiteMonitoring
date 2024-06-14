@@ -13,13 +13,28 @@ public class Main {
         system.subscribe(geera, website1);
         system.subscribe(geera, website2);
 
+        // endless loop for update checks
+        // Improve: User Input for frequency
         while (true) {
             system.checkUpdate();
             try {
-                Thread.sleep(100000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Error occured");
             }
         }
     }
 }
+
+
+
+
+/*
+Coding Conventions:
+Camel Case
+Invert if Refactoring
+
+Improve:
+not using nested loops
+DRY
+ */

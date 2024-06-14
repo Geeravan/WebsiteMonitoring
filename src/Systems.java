@@ -5,8 +5,12 @@ import java.util.List;
 public class Systems {
     private List<User> userList = new ArrayList<>();
     private Notification notification = new Notification();
-    private ComparisonStrategy comparisonStrategy = new ContentSizeComparisonStrategy();
 
+    // comparison methods
+    private ComparisonStrategy htmlComparisonStrategy = new HTMLComparisonStrategy(); 
+    private ComparisonStrategy contentSizeComparisonStrategy = new ContentSizeComparisonStrategy();
+    private ComparisonStrategy textContentComparisonStrategy = new TextContentComparisonStrategy();
+    
     public void addUser(User user){
         userList.add(user);
     }
@@ -14,13 +18,14 @@ public class Systems {
         WebsiteSubscription subscription = new WebsiteSubscription(website);
         user.addSubscriptions(subscription);
     }
-
+    // iterate userlist and the subscription list
+    // compares the old currentContent with the new downloaded content
     public void checkUpdate(){
         for (User user : userList) {
             for (WebsiteSubscription subscription : user.getSubscriptionList()) {
                 try {
                     String currentContent = subscription.getWebsite().downloadContent();
-                    if (!comparisonStrategy.compare(currentContent,subscription.getWebsite().downloadContent())) {
+                    if (!textContentComparisonStrategy.compare(currentContent,subscription.getWebsite().downloadContent())) {
                         subscription.setLastcontent(currentContent);
                         Notification.sendmessage(user, "Website " + subscription.getWebsite().getUrl() + " has been updated.");
                     }

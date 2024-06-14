@@ -1,3 +1,4 @@
+
 public interface ComparisonStrategy {
-    boolean compare(String a , String b);
+    boolean compare(String a, String b);
 }
