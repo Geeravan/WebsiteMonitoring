@@ -18,7 +18,7 @@ public class Main {
         while (true) {
             system.checkUpdate();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 System.out.println("Error occured");
             }
@@ -33,6 +33,7 @@ public class Main {
 Coding Conventions:
 Camel Case
 Invert if Refactoring
+Line Length
 
 Improve:
 not using nested loops
